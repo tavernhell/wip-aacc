@@ -1,0 +1,84 @@
+/* ELEMENTS */
+
+body {
+  background-color: #111;
+  color: white;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+/* CLASSES */
+
+.bordered {
+  border: 2px solid;
+}
+
+/* colors */
+
+.chocolate{
+  border-color: chocolate;
+}
+
+.CornflowreBlue{
+  border-color: CornflowerBlue;
+}
+
+.DarkSalmon{
+  border-color: DarkSalmon;
+}
+
+.DarkViolet{
+  border-color: DarkViolet;
+}
+
+.GoldenRod{
+  border-color: GoldenRod;
+}
+
+.LightCyan{
+  border-color: LightCyan;
+}
+
+/* grid system */
+
+.grid-container {
+  display: grid;
+}
+
+#main-container {
+  grid-template-columns: 3fr 7fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: 
+    "title title"
+    "options chart";
+  height: 100vh;
+}
+
+#title {
+  grid-area: title;
+  text-align: center;
+}
+
+#options-container {
+  grid-area: options;
+  align-content: center;
+  justify-items: center;
+}
+
+#chart-container {
+  grid-area: chart;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 1024px) {
+  #main-container {
+    grid-template-rows: auto 3fr 7fr;
+    grid-template-areas: 
+      "title title"
+      "options options"
+      "chart chart";
+  }
+}
