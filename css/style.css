@@ -1,5 +1,17 @@
-/* ELEMENTS */
+/* VARIABLES && BS5 OVERRIDE */
+:root {
+  --input-bg-color: rgb(35, 38, 39);
+  --input-border-color: rgb(60, 65, 68);
+  --chart-container-bg-color: #000;
+}
 
+.input-group-text {
+    color: rgb(209, 205, 199);
+    background-color: var(--input-bg-color);
+    border-color: var(--input-border-color);
+}
+
+/* ELEMENTS */
 body {
   background-color: #111;
   color: white;
@@ -9,6 +21,10 @@ p {
   margin-bottom: 10px;
 }
 
+input[type="text"] {
+  max-width: 75px;
+  min-width: 75px;
+}
 /* CLASSES */
 
 .bordered {
@@ -16,6 +32,9 @@ p {
 }
 
 /* colors */
+.color-selection:focus {
+  background-color: var(--input-bg-color);
+}
 
 .chocolate{
   border-color: chocolate;
@@ -69,6 +88,14 @@ p {
 
 #chart-container {
   grid-area: chart;
+  place-items: center; /* align-items + justify-items combination  */
+}
+
+#chart {
+  background-color: var(--chart-bg-color);
+  width: 600px;
+  height: 600px;
+  margin: 50px 10px;
 }
 
 /* MEDIA QUERIES */
