@@ -37,10 +37,9 @@
           <label for="bg-img-url-input" class="form-label text-center">BG image URL</label>
           <div class="input-group">
             <input type="url" class="form-control" id="bg-img-url-input">
-            <button class="btn btn-outline-secondary text-white" type="button" id="bg-img-set-btn">Set</button>
             <span class="input-group-text">Repeat?</span>
             <div class="input-group-text">
-              <input class="form-check-input" type="checkbox" value="">
+              <input id="bg-repeat-chk" class="form-check-input" type="checkbox">
             </div>
           </div>
         </div>
@@ -54,36 +53,52 @@
         </div>
         
         <!-- COL && ROW -->
-        <div class="d-flex justify-content-between mb-3">
-          <div class="input-group flex-nowrap">
+        <div class="d-flex justify-content-center mb-3">
+          <div class="input-group flex-nowrap w-auto">
             <button class="btn btn-danger" type="button"><span class="oi" data-glyph="minus"></span></button>
-            <input type="text" class="text-center" value="COLS" data-value="3" readonly>
+            <input type="text" id="col-number" class="text-center" value="COLS" data-value="3" readonly>
             <button class="btn btn-success" type="button"><span class="oi" data-glyph="plus"></span></button>
           </div>
           <div class="mx-1"></div>
-          <div class="input-group flex-nowrap">
+          <div class="input-group flex-nowrap w-auto">
             <button class="btn btn-danger" type="button"><span class="oi" data-glyph="minus"></span></button>
-            <input type="text" class="text-center" value="ROWS" data-value="3" readonly>
+            <input type="text" id="row-number" class="text-center" value="ROWS" data-value="3" readonly>
             <button class="btn btn-success" type="button"><span class="oi" data-glyph="plus"></span></button>
           </div>
         </div>
 
         <!-- IMG SIZE && GUTTER -->
-        <div class="mb-3 text-center" id="imgsize-gutter-container">
+        <div class="mb-3 text-center d-flex " id="imgsize-gutter-container">
           <!-- IMG SIZE -->
-          <label for="img-size" class="form-label text-center">Image size (<span id="img-size-span">100</span></label>px)
-          <input type="range" class="form-range" id="img-size" min="100" max="300" step="1" value="100">
-          
+          <div>
+            <label for="img-size" class="form-label text-center">Image size (<span id="img-size-span">100</span></label>px)
+            <input type="range" class="form-range" id="img-size" min="100" max="300" step="1" value="100">
+          </div>
+          <div class="mx-1"></div>
           <!-- GUTTER -->
-          <label for="gutter" class="form-label text-center">Gutter (<span id="gutter-span">0</span>px)</label>
-          <input type="range" class="form-range" id="gutter" min="0" max="5" step="0.5" value="0">
+          <div>
+            <label for="gutter" class="form-label text-center">Gutter (<span id="gutter-span">0</span>px)</label>
+            <input type="range" class="form-range" id="gutter" min="0" max="5" step="0.5" value="0">
+          </div>
         </div>
+
+        <!-- CHART TITLE -->
+        <div class="mb-3">
+          <div class="input-group">
+            <span class="input-group-text">Chart title</span>
+            <input type="text" class="form-control" id="chart-title-input">
+          </div>
+        </div>
+
         
 
       </form>
     </div>
     <div id="chart-container" class="bordered CornflowerBlue grid-container">
-      <div id="chart" class="bordered CornflowreBlue"></div>
+      <div id="chart" class="bordered CornflowreBlue">
+        <div id="chart-title"></div>
+        <div id="chart-covers"></div>
+      </div>
     </div>
   </div>
 </body>

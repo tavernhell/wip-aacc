@@ -1,14 +1,7 @@
-/* VARIABLES && BS5 OVERRIDE */
+/* VARIABLES */
 :root {
-  --input-bg-color: rgb(35, 38, 39);
   --input-border-color: rgb(60, 65, 68);
   --chart-container-bg-color: #000;
-}
-
-.input-group-text {
-    color: rgb(209, 205, 199);
-    background-color: var(--input-bg-color);
-    border-color: var(--input-border-color);
 }
 
 /* ELEMENTS */
@@ -21,7 +14,7 @@ p {
   margin-bottom: 10px;
 }
 
-input[type="text"] {
+#col-number, #row-number {
   max-width: 75px;
   min-width: 75px;
 }
@@ -31,11 +24,15 @@ input[type="text"] {
   border: 2px solid;
 }
 
-/* colors */
-.color-selection:focus {
-  background-color: var(--input-bg-color);
+.repeat-bg {
+  background-repeat: repeat!important;
 }
 
+.w-auto {
+  width: auto;
+}
+
+/* colors */
 .chocolate{
   border-color: chocolate;
 }
@@ -60,7 +57,7 @@ input[type="text"] {
   border-color: LightCyan;
 }
 
-/* grid system */
+/*! GRID SYSTEM */
 
 .grid-container {
   display: grid;
@@ -92,10 +89,25 @@ input[type="text"] {
 }
 
 #chart {
-  background-color: var(--chart-bg-color);
+  display: grid;
   width: 600px;
   height: 600px;
   margin: 50px 10px;
+  background-repeat: no-repeat;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: 
+    "title"
+    "covers";
+}
+
+#chart-title {
+  grid-area: title;
+  text-align: center;
+  font-size: 28px;
+}
+
+#chart-covers {
+  grid-area: covers;
 }
 
 /* MEDIA QUERIES */
