@@ -5,6 +5,7 @@
   --imgSize: 0;
   --gutter: 0;
   --maxChartSize: 600px;
+  --placeholderImg: url('img/placeholder.jpg');
 }
 
 /* ELEMENTS */
@@ -30,6 +31,12 @@ button > span {
 
 .bordered {
   border: 2px solid;
+}
+
+/* used to set the background image as the placeholder for all new elements */
+.placeholder {
+  background-image: url('../img/placeholder.jpg');
+  background-size: var(--imgSize);;
 }
 
 .repeat-bg {
@@ -125,9 +132,32 @@ button > span {
   grid-area: covers;
   display: grid;
   gap: var(--gutter);
-  grid-template-rows: repeat(var(--rowNum), var(--imgSize));
-  grid-template-columns: repeat(var(--colNum), var(--imgSize));
+  grid-template-rows: repeat(var(--rowNum), auto);
+  grid-template-columns: repeat(var(--colNum), auto);
 }
+
+.chart-cell {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 
+    "rank"
+    "coverpic"
+    "title";
+}
+
+.cc-rank {
+  grid-area: rank;
+}
+.cc-coverpic {
+  grid-area: coverpic;
+  width: var(--imgSize);
+  height: var(--imgSize);
+}
+.cc-title {
+  grid-area: title;
+}
+
+
 
 /* MEDIA QUERIES */
 

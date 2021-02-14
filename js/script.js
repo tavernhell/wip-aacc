@@ -16,6 +16,8 @@ const root = document.documentElement;
 
 //! EVENT LISTENERS
 optionsContainer.addEventListener('input', (e) => {
+  //scaleChart();
+  console.log(colNum*imgSize);
   const elem = e.target;
   //img size range
   if (elem.matches('#img-size')) {
@@ -39,42 +41,41 @@ optionsContainer.addEventListener('input', (e) => {
   }
 });
 
-optionsContainer.addEventListener('click', (e) => {
-  const elem = e.target;
+function scaleChart() {
+  if (colNum*imgSize > 600 || rowNum*imgSize > 600) {
+    chart.style.transform = `scale(0.5)`;
+  }
+};
 
+optionsContainer.addEventListener('click', (e) => {
+  //scaleChart();
+  const elem = e.target;
   
   //rownum++
   if (elem.matches('#row-num-btn-plus')) {
     general.setCSSVar('rowNum', ++rowNum);
-    chartFuncs.addRow();
+    chartFuncs.addCells(colNum);
   }
   //rownum--
   if (elem.matches('#row-num-btn-minus')) {
     if (rowNum != 1) {
       general.setCSSVar('rowNum', --rowNum);
-      chartFuncs.removeRow();
+      chartFuncs.removeCells(colNum);
     }
   }
   //colnum++
   if (elem.matches('#col-num-btn-plus')) {
     general.setCSSVar('colNum', ++colNum);
-    chartFuncs.addCol();
+    chartFuncs.addCells(rowNum);
   }
   //colnum--
   if (elem.matches('#col-num-btn-minus')) {
     if (colNum != 1) {
       general.setCSSVar('colNum', --colNum);
-      chartFuncs.removeCol();
+      chartFuncs.removeCells(rowNum);
     }
   }
 });
-
-
-function countElems() {
-  document.querySelectorAll('.count').forEach((el,idx) => {
-    el.textContent = idx.toString();
-  });
-}
 
 //! FUNCTIONS
 const options = {
@@ -88,12 +89,14 @@ const options = {
   },
 
   changeGutter(elem) {
-    general.setCSSVarPx('gutter',elem.value);
+    gutter = elem.value;
+    general.setCSSVarPx('gutter',gutter);
     document.querySelector('#gutter-span').textContent = elem.value;
   },
 
   changeImgSize(elem) {
-    general.setCSSVarPx('imgSize',elem.value);
+    imgSize = elem.value;
+    general.setCSSVarPx('imgSize',imgSize);
     document.querySelector('#img-size-span').textContent = elem.value;
   },
   
@@ -111,40 +114,32 @@ const options = {
 }
 
 const chartFuncs = {
-  generateGrid()  {
-    for (let r = 1; r<=rowNum; r++) {
-      for (let c = 1; c<=colNum; c++) {
-        const div = document.createElement('div');
-        div.classList.add('bordered', 'white');
-        chartCovers.appendChild(div);
-      }
-    }
+  generateInitialGrid()  {
+    this.addCells(colNum*rowNum);
   },
 
-  addRow()  {
-    for (let i = 1; i<=colNum; i++) {
+  addCells(cellsToAdd) {
+    for (let i = 1; i<=cellsToAdd; i++) {
+      //chart-cell div
       const div = document.createElement('div');
-      div.classList.add('bordered', 'white', 'count');
+      div.classList.add('bordered', 'white', 'chart-cell');
+      //rank grid
+      const rankDiv = document.createElement('div');
+      rankDiv.classList.add('cc-rank');
+      const coverpicDiv = document.createElement('div');
+      coverpicDiv.classList.add('cc-coverpic', 'placeholder');
+      const titleDiv = document.createElement('div');
+      titleDiv.classList.add('cc-title');
+      //append operations
+      div.appendChild(rankDiv);
+      div.appendChild(coverpicDiv);
+      div.appendChild(titleDiv);
       chartCovers.appendChild(div);
     }
   },
 
-  removeRow()  {
-    for (let i = 1; i<=colNum; i++) {
-      chartCovers.removeChild(chartCovers.lastChild);
-    }
-  },
-
-  addCol()  {
-    for (let i = 1; i<=rowNum; i++) {
-      const div = document.createElement('div');
-      div.classList.add('bordered', 'white');
-      chartCovers.appendChild(div);
-    }
-  },
-
-  removeCol()  {
-    for (let i = 1; i<=rowNum; i++) {
+  removeCells(cellsToRemove)  {
+    for (let i = 1; i<=cellsToRemove; i++) {
       chartCovers.removeChild(chartCovers.lastChild);
     }
   },
@@ -189,4 +184,4 @@ const textColorPicker = new JSColor('#text-color-btn', {
 }); 
 
 general.setInitialCSSVariablesValue();
-chartFuncs.generateGrid();
+chartFuncs.generateInitialGrid();
