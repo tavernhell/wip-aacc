@@ -19,7 +19,7 @@
 </head>
 
 <body>
-  <div id="main-container" class="grid-container">
+  <div id="main-container">
     <div id="title" class="bordered DarkViolet">
       <p class="fs-1">Still thinking about the name</p>
       <p class="fs-6">Inspired by xsaardo's
@@ -30,7 +30,7 @@
         </a>
       </p>
     </div>
-    <div id="options-container" class="grid-container bordered chocolate">
+    <div id="options-container" class="bordered chocolate">
       <form class="mx-3">
         <!-- IMAGE-BG -->
         <div class="mb-3 text-center">
@@ -55,15 +55,15 @@
         <!-- COL && ROW -->
         <div class="d-flex justify-content-center mb-3">
           <div class="input-group flex-nowrap w-auto">
-            <button class="btn btn-danger" type="button"><span class="oi" data-glyph="minus"></span></button>
-            <input type="text" id="col-number" class="text-center" value="COLS" data-value="3" readonly>
-            <button class="btn btn-success" type="button"><span class="oi" data-glyph="plus"></span></button>
+            <button id="col-num-btn-minus" class="btn btn-danger" type="button"><span class="oi" data-glyph="minus"></span></button>
+            <input type="text" id="col-num" class="text-center" value="COLS" data-value="3" readonly>
+            <button id="col-num-btn-plus" class="btn btn-success" type="button"><span class="oi" data-glyph="plus"></span></button>
           </div>
           <div class="mx-1"></div>
           <div class="input-group flex-nowrap w-auto">
-            <button class="btn btn-danger" type="button"><span class="oi" data-glyph="minus"></span></button>
-            <input type="text" id="row-number" class="text-center" value="ROWS" data-value="3" readonly>
-            <button class="btn btn-success" type="button"><span class="oi" data-glyph="plus"></span></button>
+            <button id="row-num-btn-minus" class="btn btn-danger" type="button"><span class="oi" data-glyph="minus"></span></button>
+            <input type="text" id="row-num" class="text-center" value="ROWS" data-value="3" readonly>
+            <button id="row-num-btn-plus" class="btn btn-success" type="button"><span class="oi" data-glyph="plus"></span></button>
           </div>
         </div>
 
@@ -78,7 +78,7 @@
           <!-- GUTTER -->
           <div>
             <label for="gutter" class="form-label text-center">Gutter (<span id="gutter-span">0</span>px)</label>
-            <input type="range" class="form-range" id="gutter" min="0" max="5" step="0.5" value="0">
+            <input type="range" class="form-range" id="gutter" min="0" max="10" value="0">
           </div>
         </div>
 
@@ -94,7 +94,7 @@
 
       </form>
     </div>
-    <div id="chart-container" class="bordered CornflowerBlue grid-container">
+    <div id="chart-container" class="bordered CornflowerBlue">
       <div id="chart" class="bordered CornflowreBlue">
         <div id="chart-title"></div>
         <div id="chart-covers"></div>

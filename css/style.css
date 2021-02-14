@@ -1,7 +1,10 @@
 /* VARIABLES */
 :root {
-  --input-border-color: rgb(60, 65, 68);
-  --chart-container-bg-color: #000;
+  --rowNum: 0; 
+  --colNum: 0;
+  --imgSize: 0;
+  --gutter: 0;
+  --maxChartSize: 600px;
 }
 
 /* ELEMENTS */
@@ -14,9 +17,14 @@ p {
   margin-bottom: 10px;
 }
 
-#col-number, #row-number {
-  max-width: 75px;
-  min-width: 75px;
+/* makes the click on button triggers when the user clicks on the span inside it */
+button > span {
+  pointer-events: none;
+}
+
+/* inputs */
+#col-num, #row-num {
+  width: 75px;
 }
 /* CLASSES */
 
@@ -35,6 +43,10 @@ p {
 /* colors */
 .chocolate{
   border-color: chocolate;
+}
+
+.white  {
+  border-color: white;
 }
 
 .CornflowreBlue{
@@ -58,12 +70,9 @@ p {
 }
 
 /*! GRID SYSTEM */
-
-.grid-container {
-  display: grid;
-}
-
+/* contains the title and options+chart */
 #main-container {
+  display: grid;
   grid-template-columns: 3fr 7fr;
   grid-template-rows: auto 1fr;
   grid-template-areas: 
@@ -72,26 +81,32 @@ p {
   height: 100vh;
 }
 
+/* title displayed on top */
 #title {
   grid-area: title;
   text-align: center;
 }
 
+/* displayed on left/under the title based on the size of the screen */
 #options-container {
+  display: grid;
   grid-area: options;
   align-content: center;
   justify-items: center;
 }
 
+/* contains the chart */
 #chart-container {
+  display: grid;
   grid-area: chart;
   place-items: center; /* align-items + justify-items combination  */
 }
 
+/* contains the title of the chart and the album covers */
 #chart {
   display: grid;
-  width: 600px;
-  height: 600px;
+  max-width: var(--maxChartSize);;
+  max-height: var(--maxChartSize);;
   margin: 50px 10px;
   background-repeat: no-repeat;
   grid-template-rows: auto 1fr;
@@ -108,6 +123,10 @@ p {
 
 #chart-covers {
   grid-area: covers;
+  display: grid;
+  gap: var(--gutter);
+  grid-template-rows: repeat(var(--rowNum), var(--imgSize));
+  grid-template-columns: repeat(var(--colNum), var(--imgSize));
 }
 
 /* MEDIA QUERIES */
