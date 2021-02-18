@@ -5,19 +5,18 @@ const chartTitle = document.querySelector('#chart-title');
 const chartTitleInput = document.querySelector('#chart-title-input');
 const chartCovers = document.querySelector('#chart-covers');
 const placeholderImg = "imgs/placeholder.jpg";
+const root = document.documentElement;
+
 let colNum = document.querySelector('#col-num').dataset.value;
 let rowNum = document.querySelector('#row-num').dataset.value;
 let imgSize = document.querySelector('#img-size').value;
 let gutter = document.querySelector('#gutter').value;
+let rank = 1;
 
 
-//! CSS VARIABLES
-const root = document.documentElement;
 
 //! EVENT LISTENERS
 optionsContainer.addEventListener('input', (e) => {
-  //scaleChart();
-  console.log(colNum*imgSize);
   const elem = e.target;
   //img size range
   if (elem.matches('#img-size')) {
@@ -41,14 +40,7 @@ optionsContainer.addEventListener('input', (e) => {
   }
 });
 
-function scaleChart() {
-  if (colNum*imgSize > 600 || rowNum*imgSize > 600) {
-    chart.style.transform = `scale(0.5)`;
-  }
-};
-
 optionsContainer.addEventListener('click', (e) => {
-  //scaleChart();
   const elem = e.target;
   
   //rownum++
@@ -98,6 +90,7 @@ const options = {
     imgSize = elem.value;
     general.setCSSVarPx('imgSize',imgSize);
     document.querySelector('#img-size-span').textContent = elem.value;
+    chartFuncs.scaleChart();
   },
   
   changeTextColor() {
@@ -125,7 +118,10 @@ const chartFuncs = {
       div.classList.add('bordered', 'white', 'chart-cell');
       //rank grid
       const rankDiv = document.createElement('div');
-      rankDiv.classList.add('cc-rank');
+
+      rankDiv.classList.add('cc-rank','text-center');
+      rankDiv.innerText = `#${rank}`;
+      rank++;
       const coverpicDiv = document.createElement('div');
       coverpicDiv.classList.add('cc-coverpic', 'placeholder');
       const titleDiv = document.createElement('div');
@@ -138,15 +134,31 @@ const chartFuncs = {
     }
   },
 
+  scaleChart() {
+    let chartSize = Math.max(colNum, rowNum) * imgSize;
+    console.log(chartSize);
+    console.log(maxChartSize);
+    if (chartSize > maxChartSize) {
+      console.log(chartSize > maxChartSize);
+      chartCovers.style.transform = `scale(${maxChartSize/chartSize})`;
+      chartCovers.style.transformOrigin = `top left`;
+    }
+  },
+
   removeCells(cellsToRemove)  {
     for (let i = 1; i<=cellsToRemove; i++) {
       chartCovers.removeChild(chartCovers.lastChild);
+      rank--;
     }
   },
 }
 
 
 const general = {
+  getCSSVarValue(cssvar) {
+    return parseInt(getComputedStyle(root).getPropertyValue(cssvar));
+  },
+
   setCSSVarPx(cssvar, jsvar) {
     root.style.setProperty(`--${cssvar}`, `${jsvar}px`);
   },
@@ -162,6 +174,10 @@ const general = {
     this.setCSSVarPx('gutter',gutter);
   },
 };
+
+
+//! CSS VARIABLES
+const maxChartSize = general.getCSSVarValue('--maxChartSize');
 
 //! COLORPICKER
 //shared options
